@@ -18,7 +18,7 @@ export default function AddEditCourseForm(props) {
 
     if (!courseData.idCourse) {
       notification["error"]({
-        message: "El id del curso es obligatorio"
+        message: "El id del estudio es obligatorio"
       });
     } else {
       const accessToken = getAccessTokenApi();
@@ -88,7 +88,7 @@ function AddEditForm(props) {
       <Form.Item>
         <Input
           prefix={<Icon type="key" />}
-          placeholder="ID del curso"
+          placeholder="ID del Estudio"
           value={courseData.idCourse}
           onChange={e =>
             setCourseData({ ...courseData, idCourse: e.target.value })
@@ -99,7 +99,7 @@ function AddEditForm(props) {
       <Form.Item>
         <Input
           prefix={<Icon type="link" />}
-          placeholder="Url del curso"
+          placeholder="Url del Estudio"
           value={courseData.link}
           onChange={e => setCourseData({ ...courseData, link: e.target.value })}
         />
@@ -117,7 +117,7 @@ function AddEditForm(props) {
       <Form.Item>
         <Input
           prefix={<Icon type="dollar" />}
-          placeholder="Precio del curso"
+          placeholder="Precio del Estudio"
           value={courseData.price}
           onChange={e =>
             setCourseData({ ...courseData, price: e.target.value })
@@ -126,7 +126,7 @@ function AddEditForm(props) {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" className="btn-submit">
-          {course ? "Actualizar curso" : "Crear curso"}
+          {course ? "Actualizar estudio" : "Crear estudio"}
         </Button>
       </Form.Item>
     </Form>

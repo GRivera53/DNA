@@ -7,7 +7,8 @@ import {
   Input,
   Button,
   DatePicker,
-  notification
+  notification,
+  Timeline,
 } from "antd";
 import moment from "moment";
 import { Editor } from "@tinymce/tinymce-react";
@@ -28,13 +29,13 @@ export default function AddEditPostForm(props) {
     }
   }, [post]);
 
-  const processPost = e => {
+  const processPost = (e) => {
     e.preventDefault();
     const { title, url, description, date } = postData;
 
     if (!title || !url || !description || !date) {
       notification["error"]({
-        message: "Todos los campos son obligatorios."
+        message: "Todos los campos son obligatorios.",
       });
     } else {
       if (!post) {
@@ -49,10 +50,10 @@ export default function AddEditPostForm(props) {
     const token = getAccessTokenApi();
 
     addPostApi(token, postData)
-      .then(response => {
+      .then((response) => {
         const typeNotification = response.code === 200 ? "success" : "warning";
         notification[typeNotification]({
-          message: response.message
+          message: response.message,
         });
         setIsVisibleModal(false);
         setReloadPosts(true);
@@ -60,7 +61,7 @@ export default function AddEditPostForm(props) {
       })
       .catch(() => {
         notification["error"]({
-          message: "Error del servidor."
+          message: "Error del servidor.",
         });
       });
   };
@@ -68,10 +69,10 @@ export default function AddEditPostForm(props) {
   const updatePost = () => {
     const token = getAccessTokenApi();
     updatePostApi(token, post._id, postData)
-      .then(response => {
+      .then((response) => {
         const typeNotification = response.code === 200 ? "success" : "warning";
         notification[typeNotification]({
-          message: response.message
+          message: response.message,
         });
         setIsVisibleModal(false);
         setReloadPosts(true);
@@ -79,7 +80,7 @@ export default function AddEditPostForm(props) {
       })
       .catch(() => {
         notification["error"]({
-          message: "Error del servidor."
+          message: "Error del servidor.",
         });
       });
   };
@@ -107,7 +108,9 @@ function AddEditForm(props) {
             prefix={<Icon type="font-size" />}
             placeholder="Titulo"
             value={postData.title}
-            onChange={e => setPostData({ ...postData, title: e.target.value })}
+            onChange={(e) =>
+              setPostData({ ...postData, title: e.target.value })
+            }
           />
         </Col>
         <Col span={8}>
@@ -115,10 +118,10 @@ function AddEditForm(props) {
             prefix={<Icon type="link" />}
             placeholder="url"
             value={postData.url}
-            onChange={e =>
+            onChange={(e) =>
               setPostData({
                 ...postData,
-                url: transformTextToUrl(e.target.value)
+                url: transformTextToUrl(e.target.value),
               })
             }
           />
@@ -132,7 +135,7 @@ function AddEditForm(props) {
             onChange={(e, value) =>
               setPostData({
                 ...postData,
-                date: moment(value, "DD/MM/YYYY HH:mm:ss").toISOString()
+                date: moment(value, "DD/MM/YYYY HH:mm:ss").toISOString(),
               })
             }
           />
@@ -147,14 +150,14 @@ function AddEditForm(props) {
           plugins: [
             "advlist autolink lists link image charmap print preview anchor",
             "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table paste code help wordcount"
+            "insertdatetime media table paste code help wordcount",
           ],
           toolbar:
             "undo redo | formatselect | bold italic backcolor | \
              alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help"
+             bullist numlist outdent indent | removeformat | help",
         }}
-        onBlur={e =>
+        onBlur={(e) =>
           setPostData({ ...postData, description: e.target.getContent() })
         }
       />

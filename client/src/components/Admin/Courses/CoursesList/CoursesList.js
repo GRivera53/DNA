@@ -50,7 +50,7 @@ export default function CoursesList(props) {
 
   const addCourseModal = () => {
     setIsVisibleModal(true);
-    setModalTitle("Creando nuevo curso");
+    setModalTitle("Creando nuevo estudio");
     setModalContent(
       <AddEditCourseForm
         setIsVisibleModal={setIsVisibleModal}
@@ -61,7 +61,7 @@ export default function CoursesList(props) {
 
   const editCourseModal = course => {
     setIsVisibleModal(true);
-    setModalTitle("Actualizando curso");
+    setModalTitle("Actualizando estudio");
     setModalContent(
       <AddEditCourseForm
         setIsVisibleModal={setIsVisibleModal}
@@ -103,14 +103,14 @@ export default function CoursesList(props) {
     <div className="courses-list">
       <div className="courses-list__header">
         <Button type="primary" onClick={addCourseModal}>
-          Nuevo curso
+          Nuevo Estudio
         </Button>
       </div>
 
       <div className="courses-list__items">
         {listCourses.length === 0 && (
           <h2 style={{ textAlign: "center", margin: 0 }}>
-            No tienes cursos creados
+            No tienes estudios
           </h2>
         )}
         <DragSortableList items={listCourses} onSort={onSort} type="vertical" />

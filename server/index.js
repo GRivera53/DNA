@@ -7,7 +7,7 @@ mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 
 mongoose.connect(
-  `mongodb://${IP_SERVER}:${PORT_DB}/agustinnavarrogaldon`,
+  `mongodb://${IP_SERVER}:${PORT_DB}/dnadiagnostica`,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, res) => {
     if (err) {

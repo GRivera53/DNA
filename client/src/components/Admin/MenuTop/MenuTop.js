@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Icon } from "antd";
-import AgusLogo from "../../../assets/img/jpg/reportes.JPG";
+import AgusLogo from "../../../assets/img/jpg/dnalogo.JPG";
 import { logout } from "../../../api/auth";
 
 import "./MenuTop.scss";
@@ -16,12 +16,7 @@ export default function MenuTop(props) {
   return (
     <div className="menu-top">
       <div className="menu-top__left">
-        <img
-          className="menu-top__left-logo"
-          src={AgusLogo}
-          alt="DNA"
-
-        />
+        <img className="menu-top__left-logo" src={AgusLogo} alt="DNA" />
         <Button type="link" onClick={() => setMenuCollapsed(!menuCollapsed)}>
           <Icon type={menuCollapsed ? "menu-unfold" : "menu-fold"} />
         </Button>
