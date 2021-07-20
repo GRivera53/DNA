@@ -1,9 +1,9 @@
 {
-  "name": "agustin-navarro-galdon-backend",
+  "name": "DNA-backend",
   "version": "0.0.1",
-  "description": "Backend para la web www.AgustinNavarroGaldon.com",
+  "description": "Backend para la web DNA Beneficios",
   "main": "index.js",
-  "author": "Agustin Navarro Galdon",
+  "author": "Gerardo Rivera",
   "license": "MIT",
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",

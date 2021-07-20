@@ -7,10 +7,24 @@ const User = require("../models/user");
 function signUp(req, res) {
   const user = new User();
 
-  const { name, lastname, email, password, repeatPassword } = req.body;
+  const {
+    codigo,
+    name,
+    lastname,
+    email,
+    phone,
+    birthdate,
+    sucursal,
+    password,
+    repeatPassword,
+  } = req.body;
+  user.codigo = codigo;
   user.name = name;
   user.lastname = lastname;
   user.email = email.toLowerCase();
+  user.phone = phone;
+  user.birthdate = birthdate;
+  user.sucursal = sucursal;
   user.role = "admin";
   user.active = false;
 
@@ -20,7 +34,7 @@ function signUp(req, res) {
     if (password !== repeatPassword) {
       res.status(404).send({ message: "Las contraseñas no son iguales." });
     } else {
-      bcrypt.hash(password, null, null, function(err, hash) {
+      bcrypt.hash(password, null, null, function (err, hash) {
         if (err) {
           res
             .status(500)
@@ -70,7 +84,7 @@ function signIn(req, res) {
             } else {
               res.status(200).send({
                 accessToken: jwt.createAccessToken(userStored),
-                refreshToken: jwt.createRefreshToken(userStored)
+                refreshToken: jwt.createRefreshToken(userStored),
               });
             }
           }
@@ -81,7 +95,7 @@ function signIn(req, res) {
 }
 
 function getUsers(req, res) {
-  User.find().then(users => {
+  User.find().then((users) => {
     if (!users) {
       res.status(404).send({ message: "No se ha encontrado ningun usuario." });
     } else {
@@ -93,7 +107,7 @@ function getUsers(req, res) {
 function getUsersActive(req, res) {
   const query = req.query;
 
-  User.find({ active: query.active }).then(users => {
+  User.find({ active: query.active }).then((users) => {
     if (!users) {
       res.status(404).send({ message: "No se ha encontrado ningun usuario." });
     } else {
@@ -125,7 +139,7 @@ function uploadAvatar(req, res) {
           if (fileExt !== "png" && fileExt !== "jpg") {
             res.status(400).send({
               message:
-                "La extension de la imagen no es valida. (Extensiones permitidas: .png y .jpg)"
+                "La extension de la imagen no es valida. (Extensiones permitidas: .png y .jpg)",
             });
           } else {
             user.avatar = fileName;
@@ -157,7 +171,7 @@ function getAvatar(req, res) {
   const avatarName = req.params.avatarName;
   const filePath = "./uploads/avatar/" + avatarName;
 
-  fs.exists(filePath, exists => {
+  fs.exists(filePath, (exists) => {
     if (!exists) {
       res.status(404).send({ message: "El avatar que buscas no existe." });
     } else {
@@ -240,10 +254,24 @@ function deleteUser(req, res) {
 function signUpAdmin(req, res) {
   const user = new User();
 
-  const { name, lastname, email, role, password } = req.body;
+  const {
+    codigo,
+    name,
+    lastname,
+    email,
+    phone,
+    birthdate,
+    sucursal,
+    role,
+    password,
+  } = req.body;
+  user.codigo = codigo;
   user.name = name;
   user.lastname = lastname;
   user.email = email.toLowerCase();
+  user.phone = phone;
+  user.birthdate = birthdate;
+  user.sucursal = sucursal;
   user.role = role;
   user.active = true;
 
@@ -287,5 +315,5 @@ module.exports = {
   updateUser,
   activateUser,
   deleteUser,
-  signUpAdmin
+  signUpAdmin,
 };
